@@ -1,0 +1,74 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'eu.appsatori:gradle-fatjar-plugin:0.2'
+        classpath 'se.transmode.gradle:gradle-docker:1.1'
+    }
+}
+
+allprojects {
+  apply plugin: 'java'
+  apply plugin: 'eclipse'
+  group = 'com.exocute'
+  version = '0.1'
+}
+
+sourceCompatibility = 1.6
+
+subprojects {
+  repositories {
+      mavenCentral()
+      maven {
+        url "https://oss.sonatype.org"
+      }
+  }
+  dependencies {
+      compile group: 'com.flyobjectspace', name: 'flyjava', version: '2.0.4'
+	  compile 'org.scala-lang:scala-actors:2.10.4'
+      testCompile "junit:junit:4.11"
+  }
+}
+
+task ClassDistributerJar(dependsOn: 'ClassDistributer:fatJar') 
+
+project(':ExocuteCommon') {
+  dependencies {
+    compile project(':ClassDistributer')
+  }
+  jar {
+      manifest {
+          attributes 'Implementation-Title': 'Exocute Common', 'Implementation-Version': version
+      }
+  } 
+}
+
+task ActivityServer(dependsOn: 'CliftonExocutePlatform:fatJar') 
+
+project(':CliftonExocutePlatform') {
+  dependencies {
+		compile project(':ExocuteCommon')
+  }
+  apply plugin: 'fatjar'
+  fatJar {
+      manifest {
+          attributes 'Implementation-Title': 'Exocute Activity Server', 'Implementation-Version': version
+	  mainAttributes ("Main-Class" : "com.exocute.clifton.node.NodeStarter")
+      }
+  }
+}
+
+project(':ClassDistributer') {
+  apply plugin: 'fatjar'
+  fatJar {
+      manifest {
+          attributes 'Implementation-Title': 'Exocute Class Distributer', 'Implementation-Version': version
+	  mainAttributes ("Main-Class" : "com.exocute.classdistributer.ClassDistributer")
+      }
+  } 
+}
+  
+artifacts {
+  ClassDistributerJar
+}
