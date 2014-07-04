@@ -11,20 +11,11 @@ import com.exocute.clifton.signals.Markers;
 
 /**
  * An CliftonNode is used by the second version of the Exocute platform as the 'worker' processor
- * node. This used to be called the Vnode in the original version.
- * 
- *  The main differences between the nodes are ...
- *  
- *  Vnode - Is a jini a service and is given Activities by the use of its Jini interface
- *  it can also be quized for its state and error codes vis this interface (clifton view)
- *  uses this for its 'stats' interfaces
- *  
- *  ... whereas ...
+ * node. 
  *  
  *  CliftonNode - Is a vanilla java (J2SE) 'main' application that is simply a client of Fly
  *  and simply uses channels to read and write objects to Fly which is the 'gue' that holds
  *  the cellular processing instructions together.
- *  
  *  
  *  The worker process connects to the Spaces via channels which mask both the dynamic space lookups
  *  performed by the SpaceCache and the marker matching processes.

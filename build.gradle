@@ -31,7 +31,7 @@ subprojects {
   }
 }
 
-task ClassDistributerJar(dependsOn: 'ClassDistributer:fatJar') 
+
 
 project(':ExocuteCommon') {
   dependencies {
@@ -43,8 +43,6 @@ project(':ExocuteCommon') {
       }
   } 
 }
-
-task ActivityServer(dependsOn: 'CliftonExocutePlatform:fatJar') 
 
 project(':CliftonExocutePlatform') {
   dependencies {
@@ -69,6 +67,18 @@ project(':ClassDistributer') {
   } 
 }
   
-artifacts {
-  ClassDistributerJar
+
+task ClassDistributerJar(dependsOn: 'ClassDistributer:fatJar') 
+
+task ActivityServer(dependsOn: 'CliftonExocutePlatform:fatJar') 
+
+task deployExocute(dependsOn: 'deploymentConfiguration')
+
+task deployConsul(type:Exec) {
+	workingDir(new File(projectDir,'/docker/ConsulAgent/'))
+	
+	commandLine './launch_ec2_consul_image.sh'
 }
+
+// Dependencies:
+// Release depends on dep

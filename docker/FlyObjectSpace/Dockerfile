@@ -10,6 +10,9 @@ RUN apt-get -qqy install gcc-4.7
 # Copy the fly
 RUN mkdir /usr/local/share/fly
 ADD fly /usr/local/share/fly/fly
+# Install consul
+RUN mkdir /usr/local/share/consul
+ADD consul /usr/local/share/fly/consul
 # Expose the fly port
 EXPOSE 4396
 RUN chmod 755 /usr/local/share/fly/fly
