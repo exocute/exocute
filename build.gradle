@@ -31,12 +31,6 @@ subprojects {
   }
 }
 
-<<<<<<< HEAD
-
-=======
-task ClassDistributerJar(dependsOn: 'ClassDistributer:fatJar') 
->>>>>>> 68362a3819093650b9f654702bbfc3e8a5244f13
-
 project(':ExocuteCommon') {
   dependencies {
     compile project(':ClassDistributer')
@@ -48,11 +42,6 @@ project(':ExocuteCommon') {
   } 
 }
 
-<<<<<<< HEAD
-=======
-task ActivityServer(dependsOn: 'CliftonExocutePlatform:fatJar') 
-
->>>>>>> 68362a3819093650b9f654702bbfc3e8a5244f13
 project(':CliftonExocutePlatform') {
   dependencies {
 		compile project(':ExocuteCommon')
@@ -75,8 +64,6 @@ project(':ClassDistributer') {
       }
   } 
 }
-  
-<<<<<<< HEAD
 
 task ClassDistributerJar(dependsOn: 'ClassDistributer:fatJar') 
 
@@ -90,10 +77,3 @@ task deployConsul(type:Exec) {
 	commandLine './launch_ec2_consul_image.sh'
 }
 
-// Dependencies:
-// Release depends on dep
-=======
-artifacts {
-  ClassDistributerJar
-}
->>>>>>> 68362a3819093650b9f654702bbfc3e8a5244f13
