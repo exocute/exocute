@@ -1,0 +1,11 @@
+#!/bin/bash
+export AWS_ACCESS_KEY=
+export AWS_SECRET_KEY=
+export EC2_HOME=~/bin/ec2-api-tools-1.7.1.0
+export EC2_PRIVATE_KEY_NAME=bkt
+export EC2_PRIVATE_KEY_FILE=~/.ssh/bkt.pem
+export PATH=$PATH:$EC2_HOME/bin
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_55.jdk/Contents/Home
+export BASE_AMI=ami-a04fb5c8
+export INSTANCE_TYPE=t1.micro
+export USER=ubuntu
