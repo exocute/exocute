@@ -72,8 +72,14 @@ task ActivityServer(dependsOn: 'CliftonExocutePlatform:fatJar')
 task deployExocute(dependsOn: 'deploymentConfiguration')
 
 task deployConsul(type:Exec) {
+	// TODO: Need to check whether this is already deployed rather than just deploy it willy-nilly
 	workingDir(new File(projectDir,'/docker/ConsulAgent/'))
-	
 	commandLine './launch_ec2_consul_image.sh'
 }
+
+task deployFly(type:Exec, dependsOn: ":deployConsul") {
+	
+}
+
+task deployExocute(dependsOn: ":deployConsul")
 
